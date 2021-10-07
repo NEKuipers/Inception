@@ -1,0 +1,21 @@
+server {
+	listen 		443 ssl default_server;
+	listen 		[::]:443 ssl default_server;
+	ssl_certificate	/etc/ssl/certs/cert.pem;	
+	ssl_certificate_key /etc/ssl/private/key.pem;
+	ssl_protocols	TLSv1.3;
+
+	root /var/www/html;
+
+	index index.php index.html index.htm;
+
+	location / {
+		try_files $uri $uri/ =404;
+	}
+
+	location ~ \.php$ {
+		include snippets/fastcgi-php.conf;
+		fastcgi_pass wordpress:9000;
+	}
+
+}
