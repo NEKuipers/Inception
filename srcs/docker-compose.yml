@@ -12,7 +12,7 @@ services:
     env_file: 
       .env
     restart:
-      unless-stopped
+      on-failure
   nginx:
     networks:
       - inceptionnetwork
@@ -23,7 +23,7 @@ services:
     env_file:
       .env
     restart:
-      unless-stopped
+      on-failure
   mariadb:
     build: 
       ./requirements/mariadb
@@ -32,11 +32,11 @@ services:
     volumes:
       - mariadb_volume:/var/www/html
     ports:
-      - 3306:3306
+      - "127.0.0.1:3306:3306"
     env_file:
       .env
     restart:
-      unless-stopped
+      on-failure
 volumes:
   wordpress_volume:
     driver: local
@@ -44,4 +44,3 @@ volumes:
     driver: local
 networks:
   inceptionnetwork:
-    driver: custom-driver-1

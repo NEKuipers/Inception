@@ -8,6 +8,6 @@ mkdir -p /var/www/html
 wget https://wordpress.org/latest.zip
 unzip latest.zip
 rm -rf latest.zip
-cp /wp-config.php ./wordpress
+cp wp-config.php ./wordpress
 service php7.3-fpm start
 service php7.3-fpm stop
