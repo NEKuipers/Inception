@@ -3,5 +3,6 @@ EXPOSE 443
 COPY ./tools/install.sh .
 COPY ./tools/start.sh .
 RUN bash install.sh
-COPY ./conf/default /etc/nginx/sites-available/
+COPY ./conf/nginx.conf /etc/nginx/nginx.conf
+COPY ./conf/nginx_sites.conf /etc/nginx/sites-available/site.conf
 ENTRYPOINT ["bash", "start.sh"]

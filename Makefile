@@ -6,13 +6,13 @@
 #    By: nkuipers <nkuipers@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2021/10/06 14:41:45 by nkuipers      #+#    #+#                  #
-#    Updated: 2021/10/06 15:55:20 by nkuipers      ########   odam.nl          #
+#    Updated: 2021/10/07 14:12:53 by nkuipers      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
 include ./srcs/.env
 
-COMP = docker-compose -f srcs/docker-compose.yml 
+COMP = docker-compose -f srcs/docker-compose.yml
 
 all: 
 	${COMP} up -d

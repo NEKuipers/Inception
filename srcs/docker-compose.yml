@@ -1,6 +1,7 @@
 version: "3"
 services:
   wordpress:
+    container_name: wordpress
     build: 
       ./requirements/wordpress
     networks:
@@ -14,6 +15,7 @@ services:
     restart:
       on-failure
   nginx:
+    container_name: nginx
     networks:
       - inceptionnetwork
     build: 
@@ -25,6 +27,7 @@ services:
     restart:
       on-failure
   mariadb:
+    container_name: mariaDB
     build: 
       ./requirements/mariadb
     networks:
