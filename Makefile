@@ -1,26 +1,25 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         ::::::::             #
-#    Makefile                                           :+:    :+:             #
-#                                                      +:+                     #
-#    By: nkuipers <nkuipers@student.codam.nl>         +#+                      #
-#                                                    +#+                       #
-#    Created: 2021/10/06 14:41:45 by nkuipers      #+#    #+#                  #
-#    Updated: 2021/10/07 14:12:53 by nkuipers      ########   odam.nl          #
-#                                                                              #
-# **************************************************************************** #
+include .env
+export $(shell sed 's/=.*//' .env)
 
-include ./srcs/.env
+up:
+	docker-compose up --build -d --remove-orphans
 
-COMP = docker-compose -f srcs/docker-compose.yml
-
-all: 
-	${COMP} up -d
-up :
-	${COMP} up -d
-start:
-	${COMP} start
 down:
-	${COMP} down
-ps:
-	${COMP} ps
+	docker-compose down -t 2
+
+preinstall:
+	sh ./srcs/preinstall.sh
+	echo "127.0.0.1 $(LOGIN).42.fr" >> /etc/hosts
+	touch preinstall
+
+# attach shell to sql container
+shell_mariadb:
+	@echo "When in shell run:"
+	@echo "select host, user, password from mysql.user;"
+	docker container exec -it inception_mariadb_1  mysql
+
+# delete everything cached by docker(-compose)
+reset:
+	docker stop $(docker ps -qa)
+	docker rm $(docker ps -qa)
+	docker rmi -f $(docker images -qa)

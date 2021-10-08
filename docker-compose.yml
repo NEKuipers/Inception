@@ -1,0 +1,34 @@
+version: "3"
+
+services:
+  mariadb:
+    build: ./srcs/mariadb/
+    restart: unless-stopped
+    volumes:
+      - ${WEBROOT_PATH}/mariadb/:/var/db/mysql/
+    networks:
+      - default
+
+  wordpress:
+    build: ./srcs/wordpress/
+    volumes:
+      - ${WEBROOT_PATH}:/var/www/
+    restart: unless-stopped
+    networks:
+      - default
+
+
+  nginx:
+    depends_on:
+      - wordpress
+    build: ./srcs/nginx/
+    ports:
+      - "443:443"
+    volumes:
+      - ${WEBROOT_PATH}:/var/www/
+    restart: unless-stopped
+    networks:
+      - default
+
+networks:
+  default:
