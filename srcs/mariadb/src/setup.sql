@@ -1,8 +1,8 @@
 CREATE DATABASE IF NOT EXISTS wordpress;
 CREATE USER 'nick'@'localhost';
-SET PASSWORD FOR 'nick'@'localhost' = PASSWORD('definitelynotasecurityrisk');
-GRANT ALL PRIVILEGES ON wordpress.* TO 'nick'@'localhost' IDENTIFIED BY 'definitelynotasecurityrisk';
-GRANT ALL ON wordpress.* to 'nick'@'%' IDENTIFIED BY 'definitelynotasecurityrisk';
+SET PASSWORD FOR 'nick'@'localhost' = PASSWORD('mypassword');
+GRANT ALL PRIVILEGES ON wordpress.* TO 'nick'@'localhost' IDENTIFIED BY 'mypassword';
+GRANT ALL ON wordpress.* to 'nick'@'%' IDENTIFIED BY 'mypassword';
 
 FLUSH PRIVILEGES;
 
