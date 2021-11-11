@@ -1,5 +1,5 @@
-include .env
-export $(shell sed 's/=.*//' .env)
+include srcs/.env
+export $(shell sed 's/=.*//' srcs/.env)
 
 up:
 	docker-compose up --build -d --remove-orphans
