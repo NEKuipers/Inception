@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         ::::::::             #
+#    Makefile                                           :+:    :+:             #
+#                                                      +:+                     #
+#    By: nkuipers <nkuipers@student.codam.nl>         +#+                      #
+#                                                    +#+                       #
+#    Created: 2021/11/11 11:06:45 by nkuipers      #+#    #+#                  #
+#    Updated: 2021/11/11 13:17:47 by nkuipers      ########   odam.nl          #
+#                                                                              #
+# **************************************************************************** #
+
 include srcs/.env
 export $(shell sed 's/=.*//' srcs/.env)
 
@@ -7,14 +19,6 @@ up:
 down:
 	docker-compose down -t 2
 
-# attach shell to sql container
-shell_mariadb:
-	@echo "When in shell run:"
-	@echo "select host, user, password from mysql.user;"
-	docker container exec -it inception_mariadb_1  mysql
-
-# delete everything cached by docker(-compose)
-reset:
-	docker stop $(docker ps -qa)
-	docker rm $(docker ps -qa)
-	docker rmi -f $(docker images -qa)
+clean:
+	docker-compose down -t 2
+	docker rmi -f $(docker images -a -q)
