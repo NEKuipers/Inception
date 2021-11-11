@@ -10,14 +10,14 @@ define( 'DB_CHARSET', 'utf8mb4' );
 define( 'DB_COLLATE', '' );
 
 
-define('AUTH_KEY',         'asuperverysecuresalthatnoonewilleverguessorhackintoyouknowyeahmm');
-define('SECURE_AUTH_KEY',  'asuperverysecuresalthatnoonewilleverguessorhackintoyouknowyeahmm');
-define('LOGGED_IN_KEY',    'asuperverysecuresalthatnoonewilleverguessorhackintoyouknowyeahmm');
-define('NONCE_KEY',        'asuperverysecuresalthatnoonewilleverguessorhackintoyouknowyeahmm');
-define('AUTH_SALT',        'asuperverysecuresalthatnoonewilleverguessorhackintoyouknowyeahmm');
-define('SECURE_AUTH_SALT', 'asuperverysecuresalthatnoonewilleverguessorhackintoyouknowyeahmm');
-define('LOGGED_IN_SALT',   'asuperverysecuresalthatnoonewilleverguessorhackintoyouknowyeahmm');
-define('NONCE_SALT',       'asuperverysecuresalthatnoonewilleverguessorhackintoyouknowyeahmm');
+define('AUTH_KEY',         'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabbbb');
+define('SECURE_AUTH_KEY',  'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabbbb');
+define('LOGGED_IN_KEY',    'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabbbb');
+define('NONCE_KEY',        'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabbbb');
+define('AUTH_SALT',        'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabbbb');
+define('SECURE_AUTH_SALT', 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabbbb');
+define('LOGGED_IN_SALT',   'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabbbb');
+define('NONCE_SALT',       'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabbbb');
 
 $table_prefix = 'wp_';
 
