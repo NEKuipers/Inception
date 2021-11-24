@@ -2,7 +2,7 @@ version: "3"
 
 services:
   mariadb:
-    build: ./mariadb/
+    build: ./requirements/mariadb/
     restart: unless-stopped
     volumes:
       - ${WEBROOT_PATH}/mariadb/:/var/db/mysql/
@@ -10,7 +10,7 @@ services:
       - default
 
   wordpress:
-    build: ./wordpress/
+    build: ./requirements/wordpress/
     volumes:
       - ${WEBROOT_PATH}:/var/www/
     restart: unless-stopped
@@ -21,7 +21,7 @@ services:
   nginx:
     depends_on:
       - wordpress
-    build: ./nginx/
+    build: ./requirements/nginx/
     ports:
       - "443:443"
     volumes:
