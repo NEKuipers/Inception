@@ -7,7 +7,7 @@ services:
     volumes:
       - ${WEBROOT_PATH}/mariadb/:/var/db/mysql/
     networks:
-      - default
+      - inception
 
   wordpress:
     build: ./requirements/wordpress/
@@ -15,7 +15,7 @@ services:
       - ${WEBROOT_PATH}:/var/www/
     restart: unless-stopped
     networks:
-      - default
+      - inception
 
 
   nginx:
@@ -28,7 +28,7 @@ services:
       - ${WEBROOT_PATH}:/var/www/
     restart: unless-stopped
     networks:
-      - default
+      - inception
 
 networks:
-  default:
+  inception:
