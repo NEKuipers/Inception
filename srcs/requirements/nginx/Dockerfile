@@ -24,8 +24,6 @@ RUN rm -rf /etc/nginx/sites-enabled/* && \
 	ln -fs /etc/nginx/sites-available/nginx.conf /etc/nginx/sites-enabled/
 	# nginx -t
 
-RUN mv index.html ${BUILDDIR}
-
 EXPOSE 443
 
 RUN chmod -R 777 ${BUILDDIR}
