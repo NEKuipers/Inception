@@ -2,6 +2,7 @@ version: "3"
 
 services:
   mariadb:
+    container_name: "mariadb"
     build: ./requirements/mariadb/
     restart: unless-stopped
     volumes:
@@ -10,6 +11,7 @@ services:
       - inception
 
   wordpress:
+    container_name: "wordpress"
     build: ./requirements/wordpress/
     volumes:
       - ${VOLPATH}:/var/www/
@@ -19,6 +21,7 @@ services:
 
 
   nginx:
+    container_name: "nginx"
     depends_on:
       - wordpress
     build: ./requirements/nginx/
