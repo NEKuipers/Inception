@@ -5,14 +5,14 @@ services:
     build: ./requirements/mariadb/
     restart: unless-stopped
     volumes:
-      - ${WEBROOT_PATH}/mariadb/:/var/db/mysql/
+      - ${VOLPATH}/mariadb/:/var/db/mysql/
     networks:
       - inception
 
   wordpress:
     build: ./requirements/wordpress/
     volumes:
-      - ${WEBROOT_PATH}:/var/www/
+      - ${VOLPATH}:/var/www/
     restart: unless-stopped
     networks:
       - inception
@@ -25,10 +25,24 @@ services:
     ports:
       - "443:443"
     volumes:
-      - ${WEBROOT_PATH}:/var/www/
+      - ${VOLPATH}:/var/www/
     restart: unless-stopped
     networks:
       - inception
 
 networks:
   inception:
+
+volumes:
+  inception-mariadb:
+    driver: local
+    driver_opts:
+      type: 'none'
+      o: 'bind'
+      device: ${VOLPATH}/mariadb
+  inception:
+    driver: local
+    driver_opts:
+      type: 'none'
+      o: 'bind'
+      device: ${VOLPATH}
