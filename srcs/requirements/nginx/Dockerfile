@@ -22,7 +22,6 @@ RUN chmod 770 mkcert-v1.4.3-linux-amd64 && \
 RUN rm -rf /etc/nginx/sites-enabled/* && \
 	mv nginx.conf /etc/nginx/sites-available/nginx.conf && \
 	ln -fs /etc/nginx/sites-available/nginx.conf /etc/nginx/sites-enabled/
-	# nginx -t
 
 EXPOSE 443
 
@@ -30,6 +29,3 @@ RUN chmod -R 777 ${BUILDDIR}
 
 CMD cp -a ${BUILDDIR}. /var/www/ && \
 	nginx -g 'daemon off;'
-
-# ENTRYPOINT [ "nginx" ]
-# CMD ["-g", "daemon off;"]
