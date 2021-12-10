@@ -3,7 +3,7 @@ FROM debian:buster
 RUN apt-get update && \
 	apt-get upgrade -y
 
-RUN apt-get install -y php-fpm php-mysql
+RUN apt-get install -y -qq php-fpm php-mysql
 
 WORKDIR /tmp/
 ENV BUILDDIR=/tmp/build/
