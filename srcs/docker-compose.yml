@@ -14,7 +14,7 @@ services:
     container_name: "wordpress"
     build: ./requirements/wordpress/
     volumes:
-      - ${VOLPATH}:/var/www/
+      - ${VOLPATH}/wordpress:/var/www/wordpress/
     restart: unless-stopped
     networks:
       - inception
@@ -28,7 +28,7 @@ services:
     ports:
       - "443:443"
     volumes:
-      - ${VOLPATH}:/var/www/
+      - ${VOLPATH}/wordpress:/var/www/wordpress/
     restart: unless-stopped
     networks:
       - inception
@@ -37,15 +37,15 @@ networks:
   inception:
 
 volumes:
-  inception-mariadb:
+  volume-mariadb:
     driver: local
     driver_opts:
       type: 'none'
       o: 'bind'
       device: ${VOLPATH}/mariadb
-  inception:
+  volume-wordpress:
     driver: local
     driver_opts:
       type: 'none'
       o: 'bind'
-      device: ${VOLPATH}
+      device: ${VOLPATH}/wordpress
