@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         ::::::::             #
+#    Dockerfile                                         :+:    :+:             #
+#                                                      +:+                     #
+#    By: nkuipers <nkuipers@student.codam.nl>         +#+                      #
+#                                                    +#+                       #
+#    Created: 2021/12/10 14:02:54 by nkuipers      #+#    #+#                  #
+#    Updated: 2021/12/10 14:12:24 by nkuipers      ########   odam.nl          #
+#                                                                              #
+# **************************************************************************** #
+
 FROM debian:buster
 
 RUN apt-get update && \
@@ -11,10 +23,10 @@ RUN mkdir -p /run/mysql
 
 RUN apt-get install mariadb-server -y
 
-RUN service mysql start && \
-	mariadb -u root < /tmp/mariadb/setup.sql
+RUN service mysql start && mariadb -u root < /tmp/mariadb/setup.sql
 
-RUN sed 's/bind-address            = 127.0.0.1/bind-address            = 0.0.0.0/' -i /etc/mysql/mariadb.conf.d/50-server.cnf
+RUN 	sed 's/bind-address            = 127.0.0.1/bind-address            = 0.0.0.0/'\
+		 -i /etc/mysql/mariadb.conf.d/50-server.cnf
 
 EXPOSE 3306
 CMD mysqld

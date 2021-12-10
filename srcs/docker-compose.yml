@@ -6,7 +6,7 @@ services:
     build: ./requirements/mariadb/
     restart: unless-stopped
     volumes:
-      - ${VOLPATH}/mariadb/:/var/lib/mysql/
+      - ${VOLPATH}/mariadb/:/var/db/mysql/  # this line fucks everything up 
     networks:
       - inception
 
