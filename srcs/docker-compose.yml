@@ -6,7 +6,7 @@ services:
     build: ./requirements/mariadb/
     restart: unless-stopped
     volumes:
-      - ${VOLPATH}/mariadb/:/var/lib/mysql/  # this line fucks everything up 
+      - ${VOLPATH}/mariadb/:/var/lib/mysql/
     networks:
       - inception
 
@@ -18,12 +18,11 @@ services:
     restart: unless-stopped
     networks:
       - inception
-
+    depends_on:
+      - "mariadb"
 
   nginx:
     container_name: "nginx"
-    depends_on:
-      - wordpress
     build: ./requirements/nginx/
     ports:
       - "443:443"

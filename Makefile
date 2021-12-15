@@ -6,7 +6,7 @@
 #    By: nkuipers <nkuipers@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2021/11/11 11:06:45 by nkuipers      #+#    #+#                  #
-#    Updated: 2021/12/10 10:40:30 by nkuipers      ########   odam.nl          #
+#    Updated: 2021/12/15 15:25:35 by nkuipers      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,12 +18,15 @@ up:
 
 down:
 	cd srcs && docker-compose down -t 2 && cd ..
+	@rm -rf ~/data/mariadb
 
 fdown:
-	cd srcs && docker-compose down -v -t 2 && cd ..
+	cd srcs && docker-compose down -t 2 -v && cd ..
+	@rm -rf ~/data
 
 clean:
 	docker-compose down --rmi all
 	
 
 .PHONY: up down fdown clean
+
