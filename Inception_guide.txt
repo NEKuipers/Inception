@@ -67,6 +67,9 @@ A network serves to allow communication between containers. Docker has its own
 network drivers that have predefined properties. For this project we only need 
 the default network, which is a bridge network.
 
+Check the status of the active versions you've made of the above by using 
+'docker image/containers/network/volume ls'.
+
 You can use docker-compose up to create the images if they don't already exist,
 and then run the docker-compose.yml file to turn them into connected containers.
 docker-compose down stops the containers, and the -v flag removes the volumes.
@@ -130,15 +133,52 @@ Part 2) Creating your Docker images
 
 The three services you need to set up all have their own needed config files, but the 
 Dockerfiles aren't too dissimilar. Set up three folders, each with a Dockerfile in it.
-Set the top lines of every Dockerfile as follows:
 
-FROM debian:buster
+Here's what you want to do in each Dockerfile:
+1) set the correct linux distribution to base your Dockerfile on (debian:buster)
+2) update & upgrade to latest
+3) install the service(s) and additional programs you want on it with 'apt-get install (service)'
+4) get the respective config files to the right location, (might need to overwrite existing ones)
+5) install whatever else you may need for the image, either via a download or something included
+    in the src folder
+6) expose the port you need: 3306 for mariadb, 443 for nginx, and 9000 for wordpress
+7) runtime begins, finish with the command you want to start running the service
+    (php-fpm for wp/php-fpm, nginx for nginx, mysqld for mariadb)
 
-RUN apt-get update && \
-	apt-get upgrade -y
+If anything goes wrong with copying files to and from images within the Dockerfile,
+they might end up in the wrong folder or whatever, here's a way to open bash within
+your container so you can check out the file structure and investigate:
 
-so that you have the correct and updated version of debian. next, RUN apt-get install
-with the services you want to install in this particular container.
+docker exec -it [container name or ID] bash
+
+with the name or ID found using docker containers ls.
+
+Also if there's ever anything wrong with your container you can use docker logs [ctr name]
+to see what's going on in there.
+
+Here are the most important config files for each service:
+ - for mariadb you'll need to apply an sql file that sets up users. What's important
+    is that this file changes access rights, so that you can only login as root into 
+    mysql via password. make sure that the content of this file is read into the
+    container with mysql / mariadb running, so that it sets the rights accordingly.
+
+    To check if it worked, and you'll need to do this in the evaluation, enter
+    the docker container with 'docker exec -it mariadb bash'. Start mysql
+    with 'mysql', if you've done this correctly you'll be blocked access 
+    without a password. start 'mysql -p' and enter your password from the sql file,
+    and it should work.
+
+- for wordpress it's wp-config.php, where you can set up the specifics of the database.
+    you can easily get a template of this and no real need to adjust too much here.
+    make sure to put it in the right place.
+
+- for nginx it's the nginx conf file. Here you can specify what port it listens on
+    (make sure that port 80 isn't set up as per the subject, we want https only).
+    You'll need to specify an SSL protocol here and set up keys.
+    Apart from that, the most important line in this file is the root line, which
+    specifies which folder will be opened when you go to localhost in browser.
+    As we want to open wordpress immediately upon startup, make sure that the path
+    you write there is where you've installed wordpress.
 
 Part 3) The Virtual Machine
 
@@ -195,3 +235,10 @@ Change this to:
 127.0.0.1   localhost   {your login}.42.fr
 127.0.1.1   osboxes
 
+---------
+This guide might not be a perfect source of information but it contains most of the
+stuff I think you'll need to do and know to complete this. 
+If you want to add or change stuff to it, feel free to do so.
+Before turning in the project, be sure to check out the corrections page that's included,
+although most of the specifics that it wants are addressed in the text above.
+Good luck!

@@ -14,7 +14,6 @@ COPY src/ ${WORKDIR}
 RUN mkdir -p /run/php
 
 RUN tar xzf latest.tar.gz --directory ${BUILDDIR} && \
-	# mv start.sh ${BUILDDIR} && \
 	mv wp-config.php ${BUILDDIR} && \
 	mv index.php ${BUILDDIR}
 
@@ -28,6 +27,5 @@ RUN chmod 777 wp-cli.phar && \
 
 EXPOSE 9000
 
-# ENTRYPOINT build/start.sh
 
 CMD cp -a ${BUILDDIR}. /var/www/ && wp-cli core install --allow-root --title="Wordpress" --admin_name="nick" --admin_password="mypassword" --admin_email="nkuipers@student.codam.nl" --path="/var/www/wordpress/" --url="https://localhost/" && php-fpm7.3 -F -R
